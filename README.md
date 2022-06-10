@@ -13,6 +13,10 @@ npm install -g @quasar/cli
 ```
 
 ## Clone this repo to your local machine and enter its directory
+- Click the "use this template" button in [this repository](https://github.com/telosnetwork/evm-ui-template) and copy the **URL** you are redirected to once the generation is finished.
+![Use this template](https://i.imgur.com/6TB0NaE.jpg)
+- Install the repository on your machine with ```bash git clone [PREVIOUSLY COPIED URL] ``` (GIT required) or download the code and install it manually
+- Enter the directory of the project ```bash cd evm-ui-template```
 
 ## Install the dependencies
 ```bash
