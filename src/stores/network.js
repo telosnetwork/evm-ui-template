@@ -23,9 +23,9 @@ export const useNetworkStore = defineStore('network', {
                     rpcUrls: [process.env.NETWORK_EVM_RPC],
                     chainName: process.env.NETWORK_EVM_CHAIN_NAME,
                     nativeCurrency: {
-                        name: "TLOS",
-                        symbol: "TLOS",
-                        decimals: 18
+                        name: process.env.NETWORK_BASE_CURRENCY_NAME,
+                        symbol: process.env.NETWORK_BASE_CURRENCY_SYMBOL,
+                        decimals: parseInt(process.env.NETWORK_BASE_CURRENCY_DECIMALS)
                     },
                     blockExplorerUrls: [process.env.NETWORK_EVM_EXPLORER]
                 }]
