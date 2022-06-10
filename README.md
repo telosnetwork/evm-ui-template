@@ -6,7 +6,7 @@ Use this template as a starting point for your app and save the time of writing 
 
 This template requires NodeJS 14+ and NPM installed
 
-## Add Vue and Quasar packages
+## Add Vue and Quasar packages globally
 ```bash
 npm install -g @vue/cli
 npm install -g @quasar/cli
