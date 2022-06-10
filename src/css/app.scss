@@ -1,0 +1,54 @@
+// app global css in SCSS form
+// GENERAL
+[clickable] {
+  cursor: pointer;
+}
+
+// HELPERS
+.mt40 {
+  margin-top: 40px;
+}
+
+// LINKS
+a {
+  text-decoration: none;
+  color: $primary;
+}
+
+// CONTAINERS
+.flex.center {
+  align-items: center;
+}
+.flex.centered {
+  justify-content: center;
+  align-items: center;
+}
+
+// TOPBAR
+.logo {
+  width: 120px;
+  margin-top: -10px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+// LOGIN BUTTON
+#login-box {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.loginButton {
+  margin-left: 10px;
+}
+#login-required .q-icon {
+  margin-right: 40px;
+}
+#login-required {
+  padding: 30px 30px 40px 30px;
+  margin-top: 40px;
+  border-radius: 20px;
+  border: 3px solid black;
+}
