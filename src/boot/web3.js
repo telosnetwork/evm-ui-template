@@ -8,7 +8,7 @@ import { ethers } from "ethers";
  */
 let web3 = {
     provider: new ethers.providers.JsonRpcProvider(process.env.NETWORK_EVM_RPC),
-    signer: new ethers.providers.Web3Provider(window.ethereum, "any"),
+    signer: (window.ethereum) ? new ethers.providers.Web3Provider(window.ethereum, "any"): null,
     network: 0
 };
 
@@ -17,24 +17,25 @@ import { useAccountStore } from 'stores/account';
 
 export default async ({  app, router, store }) => {
     // STORE INITIAL NETWORK
-    let network = await web3.signer.getNetwork();
+    let network = await web3.provider.getNetwork();
     web3.network = parseInt(network.chainId);
 
-    // NETWORK LISTENER
-    web3.signer.on("network", (newNetwork, oldNetwork) => {
-        if (oldNetwork) {
-            const networkStore = useNetworkStore();
-            const chainId = parseInt(newNetwork.chainId);
-            networkStore.setNetwork(chainId);
-            web3.network = chainId;
-        }
-    });
-
-    // ACCOUNT LISTENER
-    window.ethereum.on('accountsChanged', (accounts) => {
-        let account = useAccountStore();
-        account.setAddress(accounts[0]);
-    });
+    if(window.ethereum){
+        // NETWORK LISTENER
+        web3.signer.on("network", (newNetwork, oldNetwork) => {
+            if (oldNetwork) {
+                const networkStore = useNetworkStore();
+                const chainId = parseInt(newNetwork.chainId);
+                networkStore.setNetwork(chainId);
+                web3.network = chainId;
+            }
+        });
+        // ACCOUNT LISTENER
+        window.ethereum.on('accountsChanged', (accounts) => {
+            let account = useAccountStore();
+            account.setAddress(accounts[0]);
+        });
+    }
 
     // SET WEB3 AS GLOBAL
     app.config.globalProperties.$web3 = web3;
