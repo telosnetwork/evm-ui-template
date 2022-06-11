@@ -9,24 +9,20 @@ import { ethers } from "ethers";
 let web3 = {
     provider: new ethers.providers.JsonRpcProvider(process.env.NETWORK_EVM_RPC),
     signer: (window.ethereum) ? new ethers.providers.Web3Provider(window.ethereum, "any"): null,
-    network: 0
+    network: parseInt(process.env.NETWORK_EVM_CHAIN_ID)
 };
 
 import { useNetworkStore } from 'stores/network';
 import { useAccountStore } from 'stores/account';
 
 export default async ({  app, router, store }) => {
-    // STORE INITIAL NETWORK
-    let network = await web3.provider.getNetwork();
-    web3.network = parseInt(network.chainId);
-
-    if(window.ethereum){
+    if(web3.signer !== null){
+        web3.network = parseInt((await web3.signer.getNetwork()).chainId);
         // NETWORK LISTENER
         web3.signer.on("network", (newNetwork, oldNetwork) => {
             if (oldNetwork) {
                 const networkStore = useNetworkStore();
-                const chainId = parseInt(newNetwork.chainId);
-                networkStore.setNetwork(chainId);
+                networkStore.setNetwork(parseInt(newNetwork.chainId));
                 web3.network = chainId;
             }
         });
