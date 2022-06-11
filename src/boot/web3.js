@@ -22,7 +22,8 @@ export default async ({  app, router, store }) => {
         web3.signer.on("network", (newNetwork, oldNetwork) => {
             if (oldNetwork) {
                 const networkStore = useNetworkStore();
-                networkStore.setNetwork(parseInt(newNetwork.chainId));
+                const chainId = parseInt(newNetwork.chainId);
+                networkStore.setNetwork(chainId);
                 web3.network = chainId;
             }
         });
