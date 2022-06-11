@@ -17,7 +17,11 @@ import { useAccountStore } from 'stores/account';
 
 export default async ({  app, router, store }) => {
     if(web3.signer !== null){
-        web3.network = parseInt((await web3.signer.getNetwork()).chainId);
+        try {
+            web3.network = parseInt((await web3.signer.getNetwork()).chainId);
+        } catch (e) {
+            console.log(e)
+        }
         // NETWORK LISTENER
         web3.signer.on("network", (newNetwork, oldNetwork) => {
             if (oldNetwork) {
